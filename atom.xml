@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>개발 지식 배운 것들 끄적끄적</description>
+    <link>
+    https://WhiteNoize-SNU.github.io</link>
+    
+      
+      <item>
+        <title>Machine Learning - Regression</title>
+        
+          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Machine Learning 기초 &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;./ml-regression&quot;&gt;Regression&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;regression&quot;&gt;Regression&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;linear-regression&quot;&gt;Linear Regression&lt;/h2&gt;
+&lt;p&gt;가장 간단한 Linear Regression 모델은 다음 식으로 표현된다.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 03 Nov 2021 10:40:00 +0900</pubDate>
+        <link>
+        https://WhiteNoize-SNU.github.io/ml-regression</link>
+        <guid isPermaLink="true">https://WhiteNoize-SNU.github.io/ml-regression</guid>
+      </item>
+      
+    
+  </channel>
+</rss>

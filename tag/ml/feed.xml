@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
+  <link href="https://whitenoize-snu.github.io/tag/ml/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://whitenoize-snu.github.io/" rel="alternate" type="text/html" />
+  <updated>2021-11-04T16:40:44+09:00</updated>
+  <id>https://whitenoize-snu.github.io/tag/ml/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">IT 공부방 | </title>
+  
+
+  
+    <subtitle>개발 지식 배운 것들 끄적끄적</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Machine Learning - Regression</title>
+      <link href="https://whitenoize-snu.github.io/ml-regression" rel="alternate" type="text/html" title="Machine Learning - Regression" />
+      <published>2021-11-03T10:40:00+09:00</published>
+      <updated>2021-11-03T10:40:00+09:00</updated>
+      <id>https://whitenoize-snu.github.io/ml-regression</id>
+      <content type="html" xml:base="https://whitenoize-snu.github.io/ml-regression">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Machine Learning 기초 &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;./ml-regression&quot;&gt;Regression&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;regression&quot;&gt;Regression&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;linear-regression&quot;&gt;Linear Regression&lt;/h2&gt;
+&lt;p&gt;가장 간단한 Linear Regression 모델은 다음 식으로 표현된다.&lt;/p&gt;
+
+\[\begin{equation}
+\hat{y} = \theta_0+\theta_1x_1+\cdots+\theta_px_p
+\end{equation}\]
+
+&lt;ul&gt;
+  &lt;li&gt;\(\hat{y}\) : prediction&lt;/li&gt;
+  &lt;li&gt;\(p\) : # of features&lt;/li&gt;
+  &lt;li&gt;\(x_i\) : \(i_{th}\) feature&lt;/li&gt;
+  &lt;li&gt;\(\theta_j\) : \(j_{th}\) model parameter (\(\theta_0\) for bias, \(\theta_1, \theta_2, \cdots \theta_p\) for weights)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;벡터 표기를 이용하면 더욱 간단하게 표현이 가능하다.&lt;/p&gt;
+
+\[\begin{equation}
+\hat{y} = h_{\boldsymbol{\theta}}(\mathbf{x}) = \boldsymbol{\theta}\cdot\mathbf{x}
+\end{equation}\]
+
+&lt;ul&gt;
+  &lt;li&gt;\(\boldsymbol{\theta}=[\theta_0, \theta_1, \cdots, \theta_p]\) : Model parameter vector including bias &amp;amp; weights&lt;/li&gt;
+  &lt;li&gt;\(\mathbf{x}=[x_0, x_1, \cdots, x_p]\) : Feature vector, \(x_0=1\)&lt;/li&gt;
+  &lt;li&gt;\(h_{\boldsymbol{\theta}}\) : Hypothesis function with parameter \(\boldsymbol{\theta}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이제 \(n\)개의 훈련 세트가 있다고 해보자. 일반적으로 데이터 세트는 행이 각 데이터 레이블을 의미하고 열은 특성을 나타내므로 훈련 세트 \(\mathbf{X}\)는 \(\mathbf{X}=[\mathbf{x}^{(1)}, \mathbf{x}^{(2)}, \cdots, \mathbf{x}^{(n)}]^T\)로 나타낼 수 있다. 우리의 목표는 해당 데이터 세트가 우리의 모델에 얼마나 잘 들어맞는지 알아내는 것이다. 이러한 모델의 성능 지표로 자주 사용 되는 것으로 &lt;strong&gt;평균 제곱 오차 (MSE)&lt;/strong&gt;가 있다.&lt;/p&gt;
+
+\[\begin{equation}
+MSE\left (\mathbf{X}, h_{\boldsymbol{\theta}} \right)=\frac{1}{n}\sum_{i=1}^{n}\left(\boldsymbol{\theta}^T\mathbf{x}^{(i)}-y^{(i)} \right) ^ 2
+\end{equation}\]
+
+&lt;h3 id=&quot;normal-equation&quot;&gt;Normal Equation&lt;/h3&gt;
+&lt;p&gt;비용 함수를 최적화하는 \(\boldsymbol{\theta}=\boldsymbol{\hat{\theta}}\)를 해석적으로 구하는 방법을 &lt;strong&gt;정규방정식 (Normal Equation)&lt;/strong&gt;이라 부른다.&lt;/p&gt;
+
+\[\begin{equation}
+\boldsymbol{\hat{\theta}}=\left(\mathbf{X}^T\mathbf{X} \right)^{-1}\mathbf{X}^T\mathbf{y}
+\end{equation}\]
+
+&lt;ul&gt;
+  &lt;li&gt;\(\boldsymbol{\hat{\theta}}\) : \(\boldsymbol{\theta}\) which minimizes the cost function&lt;/li&gt;
+  &lt;li&gt;\(\mathbf{y}=[\mathbf{y}^{(1)}, \mathbf{y}^{(2)}, \cdots, \mathbf{y}^{(n)}]\) : target vector&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;proof&quot;&gt;Proof&lt;/h3&gt;
+&lt;p&gt;실제 얻는 데이터는 약간의 잡음이 섞여 있다. 따라서 모델 식에 error term을 포함하면 우리가 얻은 데이터를 표현할 수 있다.&lt;/p&gt;
+
+\[\begin{equation}
+y_i = \theta_0 + \theta_1x_{i1} + \cdots + \theta_px_{ip} + \epsilon_i
+\end{equation}\]
+
+&lt;p&gt;혹은&lt;/p&gt;
+
+\[\begin{equation}
+\mathbf{y} = \mathbf{X}\boldsymbol{\theta} + \boldsymbol{\epsilon}
+\end{equation}\]
+
+&lt;ul&gt;
+  &lt;li&gt;\(\boldsymbol{\theta}=[\theta_0, \theta_1, \cdots, \theta_p]^T\) : Feature vector&lt;/li&gt;
+  &lt;li&gt;\(\mathbf{y}=[y_1, y_2, \cdots, y_n]^T\) &lt;/li&gt;
+  &lt;li&gt;\(\mathbf{X}=\)
+\(\begin{bmatrix}
+1 &amp;amp; x_{11} &amp;amp; \cdots&amp;amp; x_{ip}\\ 
+1 &amp;amp; x_{21} &amp;amp; \cdots &amp;amp; x_{2p}\\ 
+\vdots  &amp;amp; \vdots &amp;amp; \ddots  &amp;amp; \vdots\\ 
+1 &amp;amp; x_{n1} &amp;amp; \cdots &amp;amp; x_{np}
+\end{bmatrix}\) &lt;/li&gt;
+&lt;/ul&gt;
+
+\[\begin{equation}
+\boldsymbol{\theta^*}=\underset{\boldsymbol{\theta}}{\operatorname{argmin}} \left \|\boldsymbol{\epsilon} \right \|^2 = \left \| \mathbf{y} - \mathbf{X} \boldsymbol{\theta} \right \| ^2
+\end{equation}\]
+
+&lt;p&gt;Error를 계산하면 다음과 같다.&lt;/p&gt;
+
+\[\begin{align}
+\left \| \mathbf{y} - \mathbf{X} \boldsymbol{\theta} \right \| ^2 &amp;amp;= \left ( \mathbf{y} - \mathbf{X} \boldsymbol{\theta} \right ) ^T \left ( \mathbf{y}-\mathbf{X}\boldsymbol{\theta} \right ) \\
+&amp;amp;=  \left ( \mathbf{y}^T - \boldsymbol{\theta}^T \mathbf{X}^T \right ) \left ( \mathbf{y}-\mathbf{X}\boldsymbol{\theta} \right )\\
+&amp;amp;= \mathbf{y}^T \mathbf{y} - \mathbf{y}^T \mathbf{X} \boldsymbol{\theta} - \boldsymbol{\theta}^T \mathbf{X}^T \mathbf{y} + \boldsymbol{\theta}^T \mathbf{X}^T \mathbf{X} \boldsymbol{\theta} \\
+\end{align}\]
+
+&lt;p&gt;Error의 최소값을 구하기 위해 미분방정식 \(\nabla_{\boldsymbol{\theta}} \left \| \boldsymbol{\epsilon} \right \|^2 = 0\)을 푼다.&lt;/p&gt;
+
+\[\begin{align}
+\nabla_{\boldsymbol{\theta}} \left \| \mathbf{y} - \mathbf{X} \boldsymbol{\theta} \right \| &amp;amp;= -2\mathbf{y}^T \mathbf{X} + 2\boldsymbol{\theta}^T \mathbf{X}^T \mathbf{X} = 0 \\
+\boldsymbol{\theta^*} &amp;amp;= \left(\mathbf{X}^T\mathbf{X} \right)^{-1}\mathbf{X}^T\mathbf{y}
+
+\end{align}\]
+
+&lt;p&gt;이해를 위해 가장 간단한 경우인 \(p=1\), 즉 종속변수가 한개인 경우에 대해 살펴보자. 그렇다면 모델 식 및 MSE를 아래와 같이 표현할 수 있다. 편의를 위해 MSE를 손실 함수 Loss의 앞글자를 따서 L이라고 하였다.&lt;/p&gt;
+
+\[\begin{align}
+y_i &amp;amp;= \theta_0 + \theta_1 x_i + \epsilon_i = \hat{y}_i + \epsilon_i \\
+L   &amp;amp;= MSE(\mathbf{x}, \hat{y}_i) = \frac{1}{n}\sum_{i=1}^{n} \left ( y_i - \theta_0 - \theta_1x_i \right )^2
+\end{align}\]
+
+&lt;p&gt;Loss를 파라미터 \(\theta_0, \theta_1\)에 대해 미분하면 다음과 같다.&lt;/p&gt;
+
+\[\begin{align}
+\frac{\partial L}{\partial \theta_0} &amp;amp;= -\frac{2}{n} \sum \left ( y_i - \theta_0 - \theta_1 x_i \right ) = 0 \rightarrow n\theta_0 + \left (\sum x_i \right )\theta_1 = \sum y_i \\
+\frac{\partial L}{\partial \theta_1} &amp;amp;= -\frac{2}{n} \sum x_i \left ( y_i - \theta_0 - \theta_1 x_i \right ) = 0 \rightarrow \left (\sum x_i \right )\theta_0 + \left (\sum x_i^2 \right )\theta_1 = \sum x_iy_i
+\end{align}\]
+
+&lt;p&gt;행렬을 이용해 표현하면&lt;/p&gt;
+
+\[\begin{equation}
+\begin{bmatrix}
+n &amp;amp; \sum x_i\\ 
+\sum x_i &amp;amp; \sum x_i^2
+\end{bmatrix}
+\begin{bmatrix}
+\theta_0\\ 
+\theta_1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum y_i\\ 
+\sum x_iy_i
+\end{bmatrix}
+\end{equation}\]
+
+\[\begin{equation}
+\therefore
+\begin{bmatrix}
+\theta_0\\ 
+\theta_1
+\end{bmatrix}
+=
+\begin{bmatrix}
+n &amp;amp; \sum x_i\\ 
+\sum x_i &amp;amp; \sum x_i^2
+\end{bmatrix} ^ {-1}
+\begin{bmatrix}
+\sum y_i\\ 
+\sum x_iy_i
+\end{bmatrix}
+
+\end{equation}\]
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://atmos.washington.edu/~dennis/MatrixCalculus.pdf&quot;&gt;Matrix Calculus 참고자료 ←&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
+&lt;p&gt;정규방정식 테스트를 위해 \(y=4+3x\)에 error term(Gaussian Noise)을 넣어 분포를 만들었다.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Data Generation
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;\assets\ml-regression-randomlinear.png&quot; alt=&quot;Randomly generated linear dataset&quot; /&gt;
+이제 정규방정식을 이용해 \(\boldsymbol{\hat{\theta}}\)을 구해본다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;X_b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Padding 1 to X
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;normalEquation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ndarray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ndarray&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;theta_best&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linalg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta_best&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;theta_best&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;normalEquation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta_best&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.93250303&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.02749724&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;우리가 원했던 값은 \(\theta_0=4, \theta_1=3\)이었으나 실제로 얻은 값은 \(\theta_0=3.9325, \theta_1=3.0275\)이다. 잡음의 영향으로 인해 약간의 오차가 발생한 것으로 보인다. 이 값을 토대로 우리의 모델을 그래프해 도시해본다.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;X_new&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X_new_b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X_new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X_new_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta_best&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'r-'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'bo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xlabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'$X_{1}$'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ylabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Y'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Prediction&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;\assets\ml-regression-randomlinear-2.png&quot; alt=&quot;Prediction of Linear Regression&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Python의 Scikit-learn 패키지를 사용하면 간단하게 선형 회귀를 수행할 수 있다.&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# 추가할 부분
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;coefficient-of-determination&quot;&gt;Coefficient of Determination&lt;/h2&gt;
+&lt;p&gt;Feature의 개수 \(m=1\)일 때 모델의 적합성을 평가하는 지표로 주로 사용되는 것이 결정계수 (Coefficient of Determination)이다. 진행하기에 앞서 밑의 그림과 식을 살펴보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;\assets\ml-regression-randomlinear-3.png&quot; alt=&quot;Coefficient of Determination&quot; /&gt;&lt;/p&gt;
+
+\[\begin{align}
+y_i - \bar{y} &amp;amp;= y_i - \hat{y}_i + \hat{y}_i - \bar{y} \\
+              &amp;amp;= (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y})
+\end{align}\]
+
+&lt;ul&gt;
+  &lt;li&gt;\(y_i - \hat{y}_i\) : Difference &lt;strong&gt;not&lt;/strong&gt; explained by model&lt;/li&gt;
+  &lt;li&gt;\(\hat{y}_i - \bar{y}\) : Difference explained by model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;일반적으로 error term은 평균이 0인 Gaussian Distribution을 따르므로 데이터를 평균낼 경우 error term은 사라진다. 따라서 알고 있는 데이터와 평균의 차이를 위의 두 항으로 분리할 수 있다. 이로부터 결정계수를 다음과 같이 정의하면 반응 변수 \(y_i\)의 변동량 중 모형을 통해 설명가능한 부분의 비율이라 볼 수 있다.&lt;/p&gt;
+
+\[\begin{equation}
+r^2 = \frac{SSM}{SST} = 1 - \frac{SSM}{SSE}
+\end{equation}\]
+
+&lt;p&gt;여기서&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(SST = \sum_{i=1}^{n}(y_i-\bar{y})^2\) &lt;/li&gt;
+  &lt;li&gt;\(SSE = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2\) &lt;/li&gt;
+  &lt;li&gt;\(SSM = \sum_{i=1}^{n}(\hat{y}_i-\bar{y})^2\) &lt;/li&gt;
+  &lt;li&gt;\(SST = SSE + SSM\) (😎 Prove!)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;prove&quot;&gt;Prove&lt;/h3&gt;
+&lt;p&gt;\(\begin{align}
+SST &amp;amp;= \sum \left (y_i - \bar{y} \right )^2 = \sum \left (y_i - \hat{y}_i + \hat{y}_i - \bar{y} \right )^2 = \sum \left ((y_i - \hat{y}_i) + (\hat{y}_i - \bar{y}) \right )^2 \\
+    &amp;amp;= \sum \left (y_i - \hat{y}_i \right )^2 + \sum \left (\hat{y}_i - \bar{y} \right )^2 + 2\sum(y_i - \hat{y}_i)(\hat{y}_i - \bar{y}) \\
+    &amp;amp;= SSE + SSM + 2 \times K
+\end{align}\)&lt;/p&gt;
+
+&lt;p&gt;\(K=0\)임을 보이자. 앞서 사용한 방식대로 error term인 SSE를 최소화하는 \(\theta_0, \theta_1\)을 구하면 된다.&lt;/p&gt;
+
+\[\begin{align}
+\frac{\partial SSE}{\partial \theta_0} &amp;amp;= \frac{\partial (\sum \epsilon_i^2)}{\partial \theta_0}=2\sum\epsilon_i\frac{\partial \epsilon_i}{\partial \theta_0}=2\sum\epsilon_i(-1)=0 \rightarrow \sum\epsilon_i=0 \\
+\sum \epsilon_i &amp;amp;= \sum y_i - n\theta_0 - \theta_1\sum x_i = 0 \rightarrow \theta_0 = \frac{1}{n}\sum y_i - \frac{\theta_1}{n}\sum x_i \\
+\frac{\partial SSE}{\partial \theta_1} &amp;amp;= 2\sum\epsilon\frac{\partial \epsilon_i}{\partial \theta_1} = 2\sum \epsilon_i (-x_i) = 0 \rightarrow \sum x_i (y_i - \hat{y}_i) = 0 \\
+x_i &amp;amp;= \frac{\hat{y}_i}{\theta_1} - \frac{\theta_0}{\theta_1} \rightarrow \sum \left ( \frac{\hat{y}_i}{\theta_1} - \frac{\theta_0}{\theta_1} \right ) \left ( y_i - \hat{y}_i \right ) = 0 \\
+\end{align}\]
+
+\[\begin{equation}
+\frac{1}{\theta_1}\sum \hat{y}_i(y_i - \hat{y}_i) - \frac{\theta_0}{\theta_1}\sum(y_i - \hat{y}_i) = \frac{1}{\theta_1}\sum \hat{y}_i(y_i - \hat{y}_i) - \frac{\theta_0}{\theta_1}\sum \epsilon_i = 0 \\
+\therefore \sum \hat{y}_i(y_i - \hat{y}_i) = 0
+\end{equation}\]
+
+&lt;p&gt;\(K\)를 분배하면 \(\sum \hat{y}_i(y_i - \hat{y}_i) - \bar{y}\sum(y_i - \hat{y}_i)\)이므로 앞선 결과로부터 \(K=0\)임을 알 수 있다.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>WhiteNoize</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="ml" />
+      
+
+      
+        <summary type="html">Machine Learning 기초 Regression Regression Linear Regression 가장 간단한 Linear Regression 모델은 다음 식으로 표현된다.</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
